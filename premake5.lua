@@ -1,17 +1,15 @@
 project "ImGui"
     kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
 
     targetdir("bin/" .. outputdir .. "/%{prj.name}")
     objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
-    defines    {        "IMGUI_API=__declspec(dllexport)"
-    }
+    --defines "IMGUI_API=__declspec(dllexport)"
 
-    includedirs
-    {
-        "./"
-    }
+    --includedirs "./"
 
     files
     {
@@ -30,19 +28,15 @@ project "ImGui"
 
     filter "system:windows"
         systemversion "latest"
-        cppdialect "C++17"
-        staticruntime "On"
 
     filter "system:linux"
-        pic "On"
         systemversion "latest"
-        cppdialect "C++17"
-        staticruntime "On"
+        pic "on"
 
     filter "configurations:Debug"
         runtime "Debug"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Release"
         runtime "Release"
-        optimize "On"
+        optimize "on"
